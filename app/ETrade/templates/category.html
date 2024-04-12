@@ -1,0 +1,398 @@
+{% extends "base.html" %} {% load static %} {% block content %} 
+{% load humanize %}
+
+<div class="container" style="padding: 150px 0">
+  <div class="row">
+    <div class="col-3">
+      <form action="">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+
+          <!--BRAND-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne"
+                aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseOne"
+              >
+                Brands
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseOne"
+              class="accordion-collapse collapse show"
+            >
+              <div class="accordion-body">
+                {% for brand in brands %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{brand.id}}"
+                    id="flexCheckDefault"
+                    name="brand"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{brand.brand}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!--USETYPE-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseTwo"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseTwo"
+              >
+                Use Type
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseTwo"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body">
+                {% for use_type in useTypes %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{use_type.id}}"
+                    name="use_type"
+                    id="flexCheckDefault"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{use_type.use_type}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!--PROCESSOR MODEL-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseThree"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseThree"
+              >
+                Processor Model
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseThree"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body">
+                {% for processor in processorModels %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{processor.id}}"
+                    id="flexCheckDefault"
+                    name="processor_model"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{processor.processor_model}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!--RAMSIZE-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFour"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseFour"
+              >
+                Ram Size
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseFour"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body">
+                {% for ramSize in ramSizes %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{ramSize.id}}"
+                    id="flexCheckDefault"
+                    name="ram_size"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{ramSize.ram_size}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!--DISKQUANTITY-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseFive"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseFive"
+              >
+                Disk Quantity
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseFive"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body">
+                {% for diskQuantity in diskQuantities %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{diskQuantity.id}}"
+                    id="flexCheckDefault"
+                    name="disk_quantity"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{diskQuantity.disk_quantity}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!--COLOR-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseSix"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseSix"
+              >
+                Color
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseSix"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body">
+                {% for Color in colors %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{Color.id}}"
+                    id="flexCheckDefault"
+                    name="color"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{Color.color}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!--PRICE-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseSeven"
+                aria-expanded="false"
+                aria-controls="panelsStayOpen-collapseSeven"
+              >
+                Price
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseSeven"
+              class="accordion-collapse collapse"
+            >
+              <div class="accordion-body d-flex justify-content-center align-items-center">
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      id="flexCheckDefaultMin"
+                      name="price_min"
+                      placeholder="Min"
+                    />
+                  </div>
+                  <i style="font-weight:bold;font-size:23px;">-</i>
+                  <div>
+                    <input
+                      class="form-control text-center"
+                      id="flexCheckDefaultMax"
+                      name="price_max"
+                      placeholder="Max"
+                    />
+                  </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--Filter-->
+        <div class="text-center">
+          <button class="btn btn-success mt-3 w-75" type="submit">
+            Filter
+          </button>
+          <a href="{% url "categories" %}" class="btn btn-warning mt-3 w-75">Clear</a>
+        </div>
+      </form>
+    </div>
+
+    {% comment %} CARD {% endcomment %}
+    <div class="col-9">
+      <div class="row">
+        {% for product in products %}
+        <div class="col-4 ">
+          <div class="card position-relative" style="width: 100%;height:100%;">
+            <img src="{{product.image.url}}" class="card-img-top" style="width:100%;height:225px;" alt="{{product.model}}" />
+            <div class="card-body">
+              <img
+                src="{{product.brand.image.url}}"
+                style="width: 20px; height: 20px"
+              />
+              <h5 class="card-title">{{product.brand}} - {{product.model}}</h5>
+              <p class="card-text">{{product.description|truncatechars:150}}</p>
+              <p class="card-text">{{product.price | intcomma}} ₺</p>
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-secondary">View Detail</a>
+                <a href="#" class="btn btn-primary">Add To Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block extrajs %}
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+        // Filter Brand
+        const selectedBrandId = urlParams.getAll('brand');
+        if (selectedBrandId.length > 0) {
+            $.each(selectedBrandId, function (index, brand) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="brand"][value="${brand}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+
+        // Filter Price
+        const selectedMinPrice = urlParams.get('price_min');
+        const selectedMaxPrice = urlParams.get('price_max');
+        document.getElementById('flexCheckDefaultMin').value = selectedMinPrice;
+        document.getElementById('flexCheckDefaultMax').value = selectedMaxPrice;
+
+        // Filter Usetype
+        const selectedUseTypeId = urlParams.getAll('use_type');
+        if (selectedUseTypeId.length > 0) {
+            $.each(selectedUseTypeId, function (index, use_type) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="use_type"][value="${use_type}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+
+        // Filter Processor Model
+        const selectedProcessorModelId = urlParams.getAll('processor_model');
+        if (selectedProcessorModelId.length > 0) {
+            $.each(selectedProcessorModelId, function (index, processor_model) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="processor_model"][value="${processor_model}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+        // Filter Ram Size
+        const selectedRamSizeId = urlParams.getAll('ram_size');
+        if (selectedRamSizeId.length > 0) {
+            $.each(selectedRamSizeId, function (index, ram_size) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="ram_size"][value="${ram_size}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+
+        // Filter Disk Quantity
+        const selectedDiskQuantityId = urlParams.getAll('disk_quantity');
+        if (selectedDiskQuantityId.length > 0) {
+            $.each(selectedDiskQuantityId, function (index, disk_quantity) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="disk_quantity"][value="${disk_quantity}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+        // Filter Color
+        const selectedColorId = urlParams.getAll('color');
+        if (selectedColorId.length > 0) {
+            $.each(selectedColorId, function (index, color) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="color"][value="${color}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+        
+
+    });
+    </script>
+{% endblock extrajs %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container" style="padding:250px 0;">
+    <h1 class="text-center">LOGIN</h1>
+  <div class="row">
+    <form method="POST" class="d-flex justify-content-center" action="">
+        {% csrf_token %}
+      <div class="col-9">
+
+        <div class="mb-3">
+          <label for="email" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter our email"
+          />
+        </div>
+        
+        <div class="mb-3">
+          <label for="password" class="form-label"
+            >Password</label
+          >
+          <input
+            class="form-control"
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Enter our password"
+          />
+        </div>
+        <button class="btn btn-primary float-end w-25" type="submit" >Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
