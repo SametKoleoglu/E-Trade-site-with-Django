@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block content %} 
+{% extends "eTrade/base.html" %} {% load static %} {% block content %} 
 {% load humanize %}
 
 <div class="container" style="padding: 150px 0">
@@ -7,15 +7,53 @@
       <form action="">
         <div class="accordion" id="accordionPanelsStayOpenExample">
 
-          <!--BRAND-->
+          <!--PRODUCTTYPE-->
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button
                 class="accordion-button"
                 type="button"
                 data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseOne"
+                data-bs-target="#panelsStayOpen-collapseZero"
                 aria-expanded="true"
+                aria-controls="panelsStayOpen-collapseZero"
+              >
+                Product Type
+              </button>
+            </h2>
+            <div
+              id="panelsStayOpen-collapseZero"
+              class="accordion-collapse collapse show"
+            >
+              <div class="accordion-body">
+                {% for product_type in productTypes %}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{product_type.id}}"
+                    id="flexCheckDefault"
+                    name="product_type"
+                  />
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{product_type.product_type}}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+
+          <!--BRAND-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#panelsStayOpen-collapseOne"
+                aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseOne"
               >
                 Brands
@@ -23,7 +61,7 @@
             </h2>
             <div
               id="panelsStayOpen-collapseOne"
-              class="accordion-collapse collapse show"
+              class="accordion-collapse collapse"
             >
               <div class="accordion-body">
                 {% for brand in brands %}
@@ -31,7 +69,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value="{{brand.id}}"
+                    value="{{brand.brand}}"
                     id="flexCheckDefault"
                     name="brand"
                   />
@@ -68,7 +106,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value="{{use_type.id}}"
+                    value="{{use_type.use_type}}"
                     name="use_type"
                     id="flexCheckDefault"
                   />
@@ -105,7 +143,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value="{{processor.id}}"
+                    value="{{processor.processor_model}}"
                     id="flexCheckDefault"
                     name="processor_model"
                   />
@@ -142,7 +180,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value="{{ramSize.id}}"
+                    value="{{ramSize.ram_size}}"
                     id="flexCheckDefault"
                     name="ram_size"
                   />
@@ -179,7 +217,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value="{{diskQuantity.id}}"
+                    value="{{diskQuantity.disk_quantity}}"
                     id="flexCheckDefault"
                     name="disk_quantity"
                   />
@@ -216,7 +254,7 @@
                   <input
                     class="form-check-input"
                     type="checkbox"
-                    value="{{Color.id}}"
+                    value="{{Color.color}}"
                     id="flexCheckDefault"
                     name="color"
                   />
@@ -275,7 +313,7 @@
           <button class="btn btn-success mt-3 w-75" type="submit">
             Filter
           </button>
-          <a href="{% url "categories" %}" class="btn btn-warning mt-3 w-75">Clear</a>
+          <a href="{% url "products" %}" class="btn btn-warning mt-3 w-75">Clear</a>
         </div>
       </form>
     </div>
@@ -296,13 +334,54 @@
               <p class="card-text">{{product.description|truncatechars:150}}</p>
               <p class="card-text">{{product.price | intcomma}} ₺</p>
               <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-secondary">View Detail</a>
-                <a href="#" class="btn btn-primary">Add To Cart</a>
+                <a href="{% url "product_detail" product.id %}" class="btn btn-secondary">View Detail</a>
+                <form action="" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{product.id}}" name="product_id">
+                  <button type="submit" class="position-absolute top-0 end-0" name="submit" value="btnFavorite"><i class="
+                    {% for favoriteProduct in favoriteProducts %}
+                      {% if favoriteProduct.product == product %}
+                        fa-solid fa-heart
+                        {% else %}
+                        fa-regular fa-heart
+                      {% endif %}
+                    {% endfor %} "></i></button>
+                  <button type="submit" class="btn btn-primary" name="submit" value="btnBasket">Add To Cart</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
         {% endfor %}
+      </div>
+      {% comment %} PAGINATOR {% endcomment %}
+      <div class="row d-flex justify-content-center">
+        <nav aria-label="..." class="d-flex justify-content-center mt-5">
+          <ul class="pagination">
+              
+              {% if products.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}">Back</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="?page={{ products.number|add:'-1' }}">{{ products.number|add:'-1' }}</a></li>
+                  
+              {% endif %}
+                  
+    
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{ products.number }}">{{ products.number }}</a>
+            </li>
+            
+            {% if products.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ products.number|add:'1' }}">{{ products.number|add:'1' }}</a></li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+            </li>
+              
+            {% endif %}
+              
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
@@ -316,6 +395,18 @@
         $(document).ready(function() {
             const urlParams = new URLSearchParams(window.location.search);
 
+        // Filter Product Type
+        const selectedProductTypeId = urlParams.getAll('product_type');
+        if (selectedProductTypeId.length > 0) {
+            $.each(selectedProductTypeId, function (index, product_type) {
+                //console.log(experience)
+                const checkboxInput = $(`input[name="product_type"][value="${product_type}"]`);
+                if (checkboxInput.length > 0) {
+                    checkboxInput.prop("checked", true)
+                }
+            })
+        }
+
         // Filter Brand
         const selectedBrandId = urlParams.getAll('brand');
         if (selectedBrandId.length > 0) {
@@ -327,7 +418,7 @@
                 }
             })
         }
-
+        
         // Filter Price
         const selectedMinPrice = urlParams.get('price_min');
         const selectedMaxPrice = urlParams.get('price_max');

@@ -1,0 +1,44 @@
+{% extends 'eTrade/base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+
+
+{% block content %}
+<div class="container" style="padding: 150px 0;">
+    <div class="row">
+        <h1 class="text-center">My Favourites</h1>
+        <div class="col">
+            <div class="row">
+                {% if favorites %}
+                {% for product in favorites %}
+                <div class="col-4">
+                    <div class="card" style="width: 100%;">
+                        <img src="{{ product.product.image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ product.product.brand }}</h5>
+                          <p class="card-text text-dark">{{ product.product.model }}</p>
+                          <p class="card-text text-dark">{{ product.product.price|intcomma }} TL</p>
+                          <div class="d-flex justify-content-between">
+                            <a href="{% url 'product_detail' product.product.id %}" class="btn btn-primary">Go To View</a>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ product.product.id }}" name="product_id">
+                                <button type="submit" class="btn btn-primary">Add To Card</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-center text-capitalize mt-5 w-75 text-bg-danger position-absolute align-items-center justify-content-center">I don't have any favorites</p>
+                {% endif %}
+                    
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

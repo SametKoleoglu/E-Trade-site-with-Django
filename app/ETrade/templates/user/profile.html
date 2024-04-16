@@ -1,0 +1,155 @@
+{% extends 'eTrade/base.html' %}
+{% load static %}
+{% load humanize %}
+
+
+
+{% block content %}
+    <div class="container" style="padding: 150px 0;">
+        <div class="row">
+          <p>{{profile.user.email}}</p>
+            <h3>Personal Information</h3>
+            <div class="col">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <form method="post">
+                          {% csrf_token %}
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username"  value="{{ profile.user.username }}" name="username">
+                                  </div>
+                                  <div class="col mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="email"  value="{{ profile.user.email }}" name="email">
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="firstname" class="form-label">Firstname</label>
+                                    <input type="text" class="form-control" id="firstname"  value="{{ profile.user.first_name }}" name="firstname">
+                                  </div>
+                                <div class="col mb-3">
+                                    <label for="lastname" class="form-label">Lastname</label>
+                                    <input type="text" class="form-control" id="lastname"  value="{{ profile.user.last_name }}" name="lastname">
+                                  </div>
+                                  
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="birthDate" class="form-label">Birth Date</label>
+                                    <input type="date" class="form-control" id="birthDate"  value="{{ profile.birth_date|date:'Y-m-d' }}" name="birthDate" required>
+                                  </div>
+                                  <div class="col mb-3">
+                                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                                    
+                                    {% if profile.phone_number %}
+                                    value="{{ profile.phone_number }}"
+                                    {% else %}
+                                    value=""
+                                    {% endif %}
+                                     required>
+                                  </div>
+                    
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary d-block ms-auto" name="btnsubmit" value="btnProfile">Update</button>
+                          </form>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <h3>Address Info</h3>
+            <div class="col">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <form method="post">
+                          {% csrf_token %}
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="province" class="form-label">Province</label>
+                                    <input type="text" class="form-control" id="province"  
+                                    
+                                    {% if adress.province %}
+                                    value="{{ adress.province }}"
+                                    {% endif %}
+                                      
+                                    name="province">
+                                  </div>
+                                  <div class="col mb-3">
+                                    <label for="district" class="form-label">District</label>
+                                    <input type="text" class="form-control" id="district" 
+                                    {% if adress.district %}
+                                    value="{{ adress.district }}"
+                                    {% endif %}
+                                    name="district">
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="neighborhood" class="form-label">Neighborhood</label>
+                                    <input type="text" class="form-control" id="neighborhood" 
+                                    {% if adress.neighborhood %}
+                                    value="{{ adress.neighborhood }}"
+                                    {% endif %} name="neighborhood">
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="postalCode" class="form-label">Postal Code</label>
+                                    <input type="number" class="form-control" id="postalCode" name="postalCode"
+                                    {% if adress.postal_code %}
+                                    value="{{ adress.postal_code }}"
+                                    {% endif %} >
+                                  </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea type="text" class="form-control " id="address"  cols="10" rows="10" name="address">
+                                    {% if adress.address %}
+                                    {{ adress.address }}
+                                    {% endif %}
+                                    </textarea>
+                                  </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary d-block ms-auto" name="btnsubmit" value="btnAddress">Update</button>
+                          </form>
+                    </div>
+                  </div>
+            </div>
+        </div> 
+        <div class="row mt-5">
+            <h3>Change Password</h3>
+            <div class="col">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <form method="post">
+                          {% csrf_token %}
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label for="oldPassword" class="form-label">Old Password</label>
+                                    <input type="password" class="form-control" id="oldPassword"  name="oldPass">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="newPassword" class="form-label">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword"  name="newPass">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="newPasswordAgain" class="form-label">New Password Again</label>
+                                    <input type="password" class="form-control" id="newPasswordAgain"  name="rNewPass">
+                                  </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary d-block ms-auto" name="btnsubmit" value="btnPassword">Update</button>
+                          </form>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    

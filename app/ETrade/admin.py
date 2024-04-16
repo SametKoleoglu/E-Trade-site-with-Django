@@ -42,3 +42,8 @@ class RamSizeAdmin(TranslationAdmin):
 class ProductTypeAdmin(TranslationAdmin):
     pass
 
+admin.site.register(BasketProduct)
+admin.site.register(Profil)
+admin.site.register(Adress)
+admin.site.register(Favorite)
+admin.site.register(Comment)

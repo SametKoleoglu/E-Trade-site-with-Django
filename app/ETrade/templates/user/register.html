@@ -1,71 +1,35 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "eTrade/base.html" %} {% load static %} {% block content %}
 
-<div class="container" style="padding: 250px 0">
-  <h1 class="text-center">REGISTER</h1>
+<div class="container" style="padding: 250px 0;">
+  <h1 class="text-center">Register</h1>
   <div class="row">
-    <form method="POST" class="d-flex justify-content-center">
-      {% csrf_token %}
-      <div class="col-9">
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            name="username"
-            placeholder="Enter our Username"
-          />
-        </div>
-        
-        <div class="mb-3">
-          <label for="firstname" class="form-label">First Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="firstname"
-            name="firstname"
-            placeholder="Enter our firstname"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="lastname" class="form-label">Last Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="lastname"
-            name="lastname"
-            placeholder="Enter our lastname"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter our email"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            class="form-control"
-            id="password"
-            type="text"
-            name="password"
-            placeholder="Enter our password"
-          />
-        </div>
-        <button class="btn btn-primary float-end w-25" type="submit">
-          Register
-        </button>
-      </div>
-    </form>
+      <form method="post" class="d-flex justify-content-center">
+          {% csrf_token %}
+          <div class="col-9">
+              <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" name="username">
+              </div>
+              <div class="mb-3">
+                  <label for="name" class="form-label">Firstname</label>
+                  <input type="text" class="form-control" id="name" name="firstname">
+              </div>
+              <div class="mb-3">
+                  <label for="lastname" class="form-label">Lastname</label>
+                  <input type="text" class="form-control" id="lastname" name="lastname">
+              </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+              </div>
+              <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" placeholder="*********" name="password">
+              </div>
+              <button type="submit" class="btn btn-primary d-block ms-auto">Register</button>
+          </div>
+      </form>
   </div>
 </div>
 
-{% endblock content %}
+{% endblock %}
